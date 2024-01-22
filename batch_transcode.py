@@ -12,10 +12,10 @@ import shutil
 tqdm.pandas()
 
 # Read filelist
-df = pd.read_csv("reslig202200005-BestStart-EEG_recall_progress", header=None, names=["filepath"], delimiter="\t")
+df = pd.read_csv("reslig202200005-BestStart-EEG_recall_progress")
 
-# Just AVI
-df = df[df.filepath.str.endswith(".MOV")]
+# Just MOV > 1KB
+df = df[df.filepath.str.endswith(".MOV") & (df.actual_size_bytes > 1024)]
 
 # Just get the files that are on fast tier
 #df = df[df.current_size_bytes > df.actual_size_bytes]
